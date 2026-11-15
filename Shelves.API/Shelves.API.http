@@ -1,0 +1,6 @@
+@Shelves.API_HostAddress = http://localhost:5201
+
+GET {{Shelves.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
