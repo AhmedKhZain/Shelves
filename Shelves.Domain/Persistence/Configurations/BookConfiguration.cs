@@ -1,8 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Shelves.Domain.Persistence.Configurations
 {
@@ -25,7 +22,14 @@ namespace Shelves.Domain.Persistence.Configurations
                 .HasForeignKey(b => b.AuthrId)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            builder.Property(b => b.CurrentAvailabeCopies)
+            builder.Property(b => b.CurrentAvailableCopies)
+                .IsRequired()
+                .HasDefaultValue(0);
+
+            builder.Property(b => b.ReservationPricePerDay)
+                .IsRequired()
+                .HasDefaultValue(9.99m);
+            builder.Property(b => b.TotalCopies)
                 .IsRequired()
                 .HasDefaultValue(0);
 

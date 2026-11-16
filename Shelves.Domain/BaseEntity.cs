@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace Shelves.Domain;
 
-namespace Shelves.Domain
+public abstract class BaseEntity
 {
-    public abstract class BaseEntity
+    public Guid Id { get; set; }
+
+    public BaseEntity()
     {
-       public Guid Id { get; set; }
-
-        public BaseEntity()
-        { Id = Guid.CreateVersion7(); }
-
-
-
-
-
-
-
-
+        Id = Guid.CreateVersion7();
     }
+
 }

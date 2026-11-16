@@ -1,28 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿namespace Shelves.Domain;
 
-namespace Shelves.Domain
+public class Book : BaseEntity
 {
-    public class Book : BaseEntity
+    public string Title { get; set; } = string.Empty;
+    public string Description { get; set; } = string.Empty;
+
+    public int CurrentAvailableCopies { get; set; } = 0;
+
+    public int TotalCopies { get; set; } = 0;
+
+    public decimal ReservationPricePerDay { get; set; } = 0;
+
+    public Guid? AuthrId { get; set; }
+    public Authr? Authr { get; set; } = null;
+
+    public Book(
+        string title,
+        string description,
+        int totalCopies,
+        decimal reservationPricePerDay,
+        Guid? authrId = null
+        )
+        : base()
     {
-        public string Title { get; set; } = string.Empty;
-        public string Description { get; set; } = string.Empty;
-
-        public int CurrentAvailabeCopies { get; set; } = 0;
-
-
-
-        public Guid? AuthrId { get; set; }
-        public Authr? Authr { get; set; } = null;
-        public Book(Guid? authrId, string title, string description, int currentAvailableCopies) : base()
-        {
-            AuthrId = authrId;
-            Title = title;
-            Description = description;
-            CurrentAvailabeCopies = currentAvailableCopies;
-        }
+        AuthrId = authrId;
+        Title = title;
+        Description = description;
+        CurrentAvailableCopies = totalCopies;
+        TotalCopies = totalCopies;
+        ReservationPricePerDay = reservationPricePerDay;
     }
 }
