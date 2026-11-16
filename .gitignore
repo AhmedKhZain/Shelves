@@ -26,6 +26,9 @@ bld/
 
 .VS
 .vs
+
+appsettings.Development.json
+
 # .NET Core
 project.lock.json
 project.fragment.lock.json
