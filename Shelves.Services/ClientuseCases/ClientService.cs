@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Shelves.Domain;
+﻿using Shelves.Domain;
+using Shelves.Domain.Persistence;
 using Shelves.Domain.Shared;
 
 namespace Shelves.Services.ClientuseCases;
@@ -8,7 +8,7 @@ public class ClientService : IClientServce
 {
     private readonly ShelvesDbContext _context;
 
-    public ClientService(DbContext context)
+    public ClientService(ShelvesDbContext context)
     {
         _context = context;
     }
