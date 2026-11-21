@@ -1,15 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shelves.Domain.Shared;
+using Shelves.API.Requests;
 using Shelves.Services.ClientuseCases;
 
 namespace Shelves.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientController : ControllerBase
+    public class ClientController : BaseApiController
     {
         private readonly IClientServce _clientServce;
-        public ClientController(IClientServce clientServce)
+        public ClientController(IClientServce clientServce) : base()
         {
             _clientServce = clientServce;
         }
@@ -18,21 +18,29 @@ namespace Shelves.API.Controllers
         public async Task<IActionResult> AddClient(string name, string nationalID, string? email = null, string? phoneNumber = null)
         {
             var result = await _clientServce.AddClient(name, nationalID, email, phoneNumber);
-            return Map(result);
+            return MapResult(result);
         }
-
-
-        public IActionResult Map<T>(ResultOf<T> result)
+        [HttpGet("{nationalId}")]
+        public async Task<IActionResult> GetById(
+            [FromRoute] string nationalId
+            )
         {
-            if (result.IsSuccess)
-            {
-                return Ok(result.Value);
-            }
-            else
-            {
-                return StatusCode(500, result.Errors);
-            }
+            var result = await _clientServce.GetClientById(nationalId);
+            return MapResult(result);
         }
-
+        [HttpGet]
+        public async Task<IActionResult> GetAll(
+            [FromQuery] ClientGetAllRequest request
+            )
+        {
+            var result = await _clientServce.GetAll(request.Name, request.Email, request.Phone, request.PageNumber, request.PageSize);
+            return MapResult(result);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteClient([FromRoute] string id)
+        {
+            var result = await _clientServce.DeleteClient(id);
+            return MapResult(result);
+        }
     }
 }

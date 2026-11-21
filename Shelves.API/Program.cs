@@ -1,5 +1,5 @@
-using Shelves.Services;
 using Shelves.Domain.Persistence;
+using Shelves.Services;
 namespace Shelves.API;
 
 public class Program
@@ -14,7 +14,7 @@ public class Program
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
         builder.Services.AddServices().AddPersistence(builder.Configuration);
-
+        builder.Services.AddCors();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -22,6 +22,13 @@ public class Program
         {
             app.MapOpenApi();
         }
+
+        app.UseCors(options => options
+            .SetIsOriginAllowed(_ => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+
 
         app.UseHttpsRedirection();
 
