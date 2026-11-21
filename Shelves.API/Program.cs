@@ -1,4 +1,5 @@
 using Shelves.Services;
+using Shelves.Domain.Persistence;
 namespace Shelves.API;
 
 public class Program
@@ -12,7 +13,7 @@ public class Program
         builder.Services.AddControllers();
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
-        builder.Services.AddServices();
+        builder.Services.AddServices().AddPersistence(builder.Configuration);
 
         var app = builder.Build();
 

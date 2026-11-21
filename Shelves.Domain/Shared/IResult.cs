@@ -4,7 +4,9 @@ public interface IResultOf
 {
     bool IsError { get; }
     bool IsSuccess { get; }
+    DoneStatus StatusCode { get; }
     List<Error> Errors { get; }
+   
 }
 
 
