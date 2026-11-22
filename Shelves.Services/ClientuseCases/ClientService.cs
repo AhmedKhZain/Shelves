@@ -70,4 +70,17 @@ public class ClientService : IClientServce
     }
 
 
+    public async Task<ResultOf<Client>> DeleteClient(string nationalID)
+    {
+        var clientResult = await GetClientById(nationalID);
+        if (clientResult.IsError)
+        {
+            return clientResult.Errors;
+        }
+        var client = clientResult.Value!;
+        _context.Clients.Remove(client);
+        await _context.SaveChangesAsync();
+        return client;
+    }
+
 }

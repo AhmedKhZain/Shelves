@@ -9,5 +9,7 @@ public interface IClientServce
     Task<ResultOf<List<Client>>> GetAll(string? name, string? email, string? phone, int pageNum = 0, int pageSize = 12);
     Task<ResultOf<Client>> GetClientById(string nationalID);
 
+    Task<ResultOf<Client>> DeleteClient(string nationalID);
+
 
 }
