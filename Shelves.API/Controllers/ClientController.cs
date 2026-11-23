@@ -20,12 +20,12 @@ namespace Shelves.API.Controllers
             var result = await _clientServce.AddClient(name, nationalID, email, phoneNumber);
             return MapResult(result);
         }
-        [HttpGet("{nationalId}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(
-            [FromRoute] string nationalId
+            [FromRoute] Guid id
             )
         {
-            var result = await _clientServce.GetClientById(nationalId);
+            var result = await _clientServce.GetClientById(id);
             return MapResult(result);
         }
         [HttpGet]
@@ -37,7 +37,7 @@ namespace Shelves.API.Controllers
             return MapResult(result);
         }
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteClient([FromRoute] string id)
+        public async Task<IActionResult> DeleteClient([FromRoute] Guid id)
         {
             var result = await _clientServce.DeleteClient(id);
             return MapResult(result);
