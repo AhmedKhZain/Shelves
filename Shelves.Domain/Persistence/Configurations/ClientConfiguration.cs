@@ -11,8 +11,7 @@ internal class ClientConfiguration : IEntityTypeConfiguration<Client>
             .HasMaxLength(320)
             .IsRequired(false);
 
-        builder.HasIndex(c => c.Email)
-            .IsUnique(true);
+        builder.HasIndex(c => c.Email);
 
 
         builder.Property(c => c.NationalID)
@@ -28,8 +27,7 @@ internal class ClientConfiguration : IEntityTypeConfiguration<Client>
             .HasMaxLength(15)
             .IsRequired(false);
 
-        builder.HasIndex(c => c.PhoneNumber)
-            .IsUnique(true);
+        builder.HasIndex(c => c.PhoneNumber);
 
 
 

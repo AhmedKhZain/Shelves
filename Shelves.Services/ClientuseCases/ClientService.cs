@@ -22,6 +22,26 @@ public class ClientService : IClientServce
         {
             return clientcreationresult.Errors;
         }
+        // Check for duplicate National ID
+        if (await _context.Clients.AnyAsync(c => c.NationalID == nationalID))
+        {
+            return Error.Validation(code: "ClientService.AddClient.DuplicateNationalID", message: $"A client with National ID {nationalID} already exists.");
+        }
+
+        // Check for duplicate email and is not null or whitespace
+
+        if (!string.IsNullOrWhiteSpace(email) && await _context.Clients.AnyAsync(c => c.Email == email))
+        {
+            return Error.Validation(code: "ClientService.AddClient.DuplicateEmail", message: $"A client with Email {email} already exists.");
+        }
+
+        // Check for duplicate phone number and is not null or whitespace
+
+        if (!string.IsNullOrWhiteSpace(phoneNumber) && await _context.Clients.AnyAsync(c => c.PhoneNumber == phoneNumber))
+        {
+            return Error.Validation(code: "ClientService.AddClient.DuplicatePhoneNumber", message: $"A client with Phone Number {phoneNumber} already exists.");
+        }
+
         _context.Clients.Add(clientcreationresult.Value!);
         await _context.SaveChangesAsync();
         return clientcreationresult;
@@ -59,20 +79,20 @@ public class ClientService : IClientServce
 
     }
 
-    public async Task<ResultOf<Client>> GetClientById(string nationalID)
+    public async Task<ResultOf<Client>> GetClientById(Guid id)
     {
-        Client? client = await _context.Clients.FirstOrDefaultAsync(c => c.NationalID == nationalID);
+        Client? client = await _context.Clients.FirstOrDefaultAsync(c => c.Id == id);
         if (client == null)
         {
-            return Error.NotFound(code: "ClientNotFound", message: $"Client with National ID {nationalID} not found.");
+            return Error.NotFound(code: "ClientNotFound", message: $"Client with ID {id} not found.");
         }
         return client;
     }
 
 
-    public async Task<ResultOf<Client>> DeleteClient(string nationalID)
+    public async Task<ResultOf<Client>> DeleteClient(Guid id)
     {
-        var clientResult = await GetClientById(nationalID);
+        var clientResult = await GetClientById(id);
         if (clientResult.IsError)
         {
             return clientResult.Errors;
