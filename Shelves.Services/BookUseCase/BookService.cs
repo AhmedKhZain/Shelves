@@ -42,7 +42,7 @@ namespace Shelves.Services.BookUseCase
             return book ;
         }
 
-        public async Task<ResultOf<List<Book>>> GetAll(string? title, string? description, int pageNum = 0, int pageSize = 12)
+        public async Task<ResultOf<List<Book>>> GetAll(string? title = null, string? description = null, int pageNum = 0, int pageSize = 12)
         {
             var query = _dbContext.Books.AsNoTracking();
 
