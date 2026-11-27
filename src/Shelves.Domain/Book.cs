@@ -12,7 +12,7 @@ public class Book : BaseEntity
     public decimal ReservationPricePerDay { get; set; } = 0;
 
     public Guid? AuthrId { get; set; }
-    public Authr? Authr { get; set; } = null;
+    public Author? Authr { get; set; } = null;
 
     public Book(
         string title,

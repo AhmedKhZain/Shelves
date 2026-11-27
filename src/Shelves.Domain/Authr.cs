@@ -1,6 +1,6 @@
 ﻿namespace Shelves.Domain;
 
-public class Authr : BaseEntity
+public class Author : BaseEntity
 {
     public ICollection<Book> Books { get; set; } = new List<Book>();
     public string Name { get; set; } = string.Empty;
@@ -9,7 +9,7 @@ public class Authr : BaseEntity
 
 
 
-    public Authr(
+    public Author(
         string name,
         DateTime? birthDate,
         string? bio)

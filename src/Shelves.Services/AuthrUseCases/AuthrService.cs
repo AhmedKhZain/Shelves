@@ -16,9 +16,9 @@ namespace Shelves.Services.AuthrUseCases
             _context = context;
         }
 
-        public async Task<ResultOf<Authr>> AddAuthr(string name, DateTime? birthDate, string? bio)
+        public async Task<ResultOf<Author>> AddAuthr(string name, DateTime? birthDate, string? bio)
         {
-            Authr authr = new Authr(name, birthDate, bio);
+            Author authr = new Author(name, birthDate, bio);
             if (await _context.Authors.AnyAsync(a => a.Name == name && a.BirthDate == birthDate))
             {
                 return Error.Validation("Authr already exists");
@@ -28,7 +28,7 @@ namespace Shelves.Services.AuthrUseCases
             return authr;
         }
 
-        public async Task<ResultOf<Authr>> DeleteAuthr(Guid id)
+        public async Task<ResultOf<Author>> DeleteAuthr(Guid id)
         {
             var authr = await _context.Authors.FirstOrDefaultAsync(a => a.Id == id);
             if (authr == null)
@@ -40,7 +40,7 @@ namespace Shelves.Services.AuthrUseCases
             return authr;
         }
 
-        public async Task<ResultOf<List<Authr>>> GetAll(string? name, int pageNum = 0, int pageSize = 12)
+        public async Task<ResultOf<List<Author>>> GetAll(string? name, int pageNum = 0, int pageSize = 12)
         {
             var query = _context.Authors.AsQueryable();
             if (!string.IsNullOrEmpty(name))
@@ -52,7 +52,7 @@ namespace Shelves.Services.AuthrUseCases
             return authrs;
         }
 
-        public async Task<ResultOf<Authr>> GetAuthrById(Guid id)
+        public async Task<ResultOf<Author>> GetAuthrById(Guid id)
         {
             var authr = await _context.Authors.FirstOrDefaultAsync(a => a.Id == id);
             if (authr == null)
@@ -73,7 +73,7 @@ namespace Shelves.Services.AuthrUseCases
             return books;
         }
 
-        public async Task<ResultOf<Authr>> UpdateAuthr(Guid id, string name, DateTime? birthDate, string? bio)
+        public async Task<ResultOf<Author>> UpdateAuthr(Guid id, string name, DateTime? birthDate, string? bio)
         {
             var authr = await _context.Authors.FirstOrDefaultAsync(a => a.Id == id);
             if (authr == null)

@@ -9,11 +9,11 @@ namespace Shelves.Services.AuthrUseCases
     public interface IAuthrService
     {
 
-        Task <ResultOf<Authr>> AddAuthr(string name, DateTime? birthDate, string? bio);
-        Task <ResultOf<List<Authr>>> GetAll(string? name, int pageNum = 0, int pageSize = 12);
-        Task<ResultOf<Authr>> GetAuthrById(Guid id);
-        Task<ResultOf<Authr>> DeleteAuthr(Guid id);
-        Task<ResultOf<Authr>> UpdateAuthr(Guid id, string name, DateTime? birthDate, string? bio);
+        Task <ResultOf<Author>> AddAuthr(string name, DateTime? birthDate, string? bio);
+        Task <ResultOf<List<Author>>> GetAll(string? name, int pageNum = 0, int pageSize = 12);
+        Task<ResultOf<Author>> GetAuthrById(Guid id);
+        Task<ResultOf<Author>> DeleteAuthr(Guid id);
+        Task<ResultOf<Author>> UpdateAuthr(Guid id, string name, DateTime? birthDate, string? bio);
         Task <ResultOf<List<Book>>> GetBooksByAuthrId(Guid authrId, int pageNum = 0, int pageSize = 12);
     }
 }

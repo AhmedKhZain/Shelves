@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Shelves.Domain.Persistence.Configurations
 {
-    public class AutherConfiguration : IEntityTypeConfiguration<Authr>
+    public class AutherConfiguration : IEntityTypeConfiguration<Author>
     {
-        public void Configure(EntityTypeBuilder<Authr> builder)
+        public void Configure(EntityTypeBuilder<Author> builder)
         {
             builder.HasKey(a => a.Id);
 
