@@ -1,5 +1,7 @@
 <Solution>
-  <Project Path="Shelves.API/Shelves.API.csproj" Id="42e06765-30b3-4ebd-bfe0-9b5580425ea4" />
-  <Project Path="Shelves.Domain/Shelves.Domain.csproj" Id="6e4b8eb4-c9f9-4a25-ad6f-783ea18f6df6" />
-  <Project Path="Shelves.Services/Shelves.Services.csproj" Id="943d42e5-1f86-4811-9f9f-060239f9d6a1" />
+  <Folder Name="/src/">
+    <Project Path="src/Shelves.API/Shelves.API.csproj" />
+    <Project Path="src/Shelves.Domain/Shelves.Domain.csproj" />
+    <Project Path="src/Shelves.Services/Shelves.Services.csproj" />
+  </Folder>
 </Solution>
