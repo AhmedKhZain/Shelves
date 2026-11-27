@@ -1,5 +1,5 @@
+using Scalar.AspNetCore;
 using Shelves.Domain.Persistence;
-using Microsoft.Extensions.Logging.Abstractions;
 using Shelves.Services;
 namespace Shelves.API;
 
@@ -24,15 +24,26 @@ public class Program
         if (app.Environment.IsDevelopment())
         {
             app.MapOpenApi();
+
             app.UseSwagger();
-            app.UseSwaggerUI();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "swagger";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
+            });
+
+            app.MapScalarApiReference(options =>
+            {
+                options.WithOpenApiRoutePattern("/swagger/v1/swagger.json");
+            });
         }
 
-        app.UseCors(options => options
-            .SetIsOriginAllowed(_ => true)
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials());
+        app.UseCors(options =>
+            options.SetIsOriginAllowed(_ => true)
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+        );
 
 
         app.UseHttpsRedirection();

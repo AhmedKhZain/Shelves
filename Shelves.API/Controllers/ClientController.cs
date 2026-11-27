@@ -15,9 +15,9 @@ namespace Shelves.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddClient(string name, string nationalID, string? email = null, string? phoneNumber = null)
+        public async Task<IActionResult> AddClient([FromBody] ClientAddRequest request)
         {
-            var result = await _clientServce.AddClient(name, nationalID, email, phoneNumber);
+            var result = await _clientServce.AddClient(request.Name, request.NationalID, request.Email, request.PhoneNumber);
             return MapResult(result);
         }
         [HttpGet("{id}")]

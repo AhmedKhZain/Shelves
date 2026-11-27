@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shelves.Services.BookUseCase;
 
 namespace Shelves.API.Controllers
@@ -22,7 +21,7 @@ namespace Shelves.API.Controllers
         }
 
 
-        [HttpGet("{id}")]   
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetBookById([FromRoute] Guid id)
         {
             var result = await _bookService.GetBookById(id);
@@ -32,7 +31,7 @@ namespace Shelves.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllBooks()
         {
-            var result = await _bookService.GetAll() ;
+            var result = await _bookService.GetAll();
             return MapResult(result);
         }
 
